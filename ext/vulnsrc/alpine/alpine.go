@@ -48,6 +48,8 @@ type updater struct {
 	repositoryLocalPath string
 }
 
+func (u *updater) SetVulnDir(vulndir string) {}
+
 func (u *updater) Update(db database.Datastore) (resp vulnsrc.UpdateResponse, err error) {
 	log.WithField("package", "Alpine").Info("Start fetching vulnerabilities")
 

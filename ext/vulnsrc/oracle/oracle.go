@@ -85,6 +85,8 @@ func init() {
 	vulnsrc.RegisterUpdater("oracle", &updater{})
 }
 
+func (u *updater) SetVulnDir(vulndir string) {}
+
 func compareELSA(left, right int) int {
 	// Fast path equals.
 	if right == left {

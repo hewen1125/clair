@@ -44,6 +44,8 @@ type UpdateResponse struct {
 
 // Updater represents anything that can fetch vulnerabilities.
 type Updater interface {
+	SetVulnDir(string)
+
 	// Update gets vulnerability updates.
 	Update(database.Datastore) (UpdateResponse, error)
 

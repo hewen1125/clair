@@ -17,6 +17,7 @@ package clair
 import (
 	"fmt"
 	"math/rand"
+	"path"
 	"strconv"
 	"sync"
 	"time"
@@ -69,6 +70,7 @@ func init() {
 type UpdaterConfig struct {
 	EnabledUpdaters []string
 	Interval        time.Duration
+	Vulndir         string
 }
 
 type vulnerabilityChange struct {
@@ -89,6 +91,11 @@ func RunUpdater(config *UpdaterConfig, datastore database.Datastore, st *stopper
 
 	whoAmI := uuid.New()
 	log.WithField("lock identifier", whoAmI).Info("updater service started")
+
+	// SetVulnDir
+	for name, updaters := range vulnsrc.Updaters() {
+		updaters.SetVulnDir(path.Join(config.Vulndir, name))
+	}
 
 	for {
 		var stop bool

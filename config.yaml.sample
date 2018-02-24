@@ -74,6 +74,9 @@ clair:
       - rhel
       - oracle
       - alpine
+    # The local directory for the data sources
+    # If one is not provided, it will be the os.TempDir().
+    vulndir: ""
 
   notifier:
     # Number of attempts before the notification is marked as failed to be sent

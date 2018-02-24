@@ -84,6 +84,10 @@ func init() {
 	vulnsrc.RegisterUpdater("ubuntu", &updater{})
 }
 
+func (u *updater) SetVulnDir(vulndir string) {
+	u.repositoryLocalPath = vulndir
+}
+
 func (u *updater) Update(datastore database.Datastore) (resp vulnsrc.UpdateResponse, err error) {
 	log.WithField("package", "Ubuntu").Info("Start fetching vulnerabilities")
 
@@ -172,7 +176,7 @@ func (u *updater) Update(datastore database.Datastore) (resp vulnsrc.UpdateRespo
 }
 
 func (u *updater) Clean() {
-	os.RemoveAll(u.repositoryLocalPath)
+	// os.RemoveAll(u.repositoryLocalPath)
 }
 
 func (u *updater) pullRepository() (err error) {
